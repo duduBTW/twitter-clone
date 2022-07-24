@@ -1,18 +1,17 @@
-import { UserProps } from "pages/home";
 import { FC } from "react";
+import { UserProps } from "pages/home";
+import { useSession } from "next-auth/react";
 
 // components
 import styled from "@emotion/styled";
 import Avatar from "components/avatar/avatar";
 import Button from "components/button";
 
-interface Props {
+const UserHeader: FC<{
   user: UserProps;
-}
+}> = ({ user: { id, name, profileCover, profilePicture } }) => {
+  const { data: session } = useSession();
 
-const UserHeader: FC<Props> = ({
-  user: { id, name, profileCover, profilePicture },
-}) => {
   return (
     <Container>
       <Banner
@@ -25,7 +24,7 @@ const UserHeader: FC<Props> = ({
           width="14rem"
           height="14rem"
         />
-        <FollowButton variant="oulined">Follow</FollowButton>
+        {session && <FollowButton variant="oulined">Follow</FollowButton>}
       </Header>
       <Name>{name}</Name>
       <Id>@{id}</Id>

@@ -2,14 +2,14 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "utils/prisma";
+import { UserProps } from "pages/home";
 
 declare module "next-auth" {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
-  interface Session {
+  interface Session extends UserProps {
     user: {
-      /** The user's postal address. */
       id: string;
     };
   }

@@ -9,33 +9,18 @@ import getLoggedUser from "utils/getLoggedUser";
 
 interface Props {
   feed: TweetProps[];
-  session: UserProps;
 }
 
-export interface UserProps {
-  id: string;
-  name: string | null;
-  profilePicture: string | null;
-  profileCover: string | null;
-}
+const Home: NextPage<Props> = ({ feed }) => {
+  console.log(feed);
 
-export interface TweetProps {
-  id: number;
-  retweeted: boolean | null;
-  liked: boolean | null;
-  UserTwitter: UserProps;
-  createdAt: Date;
-  content: TweetContent[];
-
-  // todo
-  // answering: any[];
-  // answers: any[];
-}
-
-export type TweetContent = {
-  type: string;
-  html: string | null;
-  src: string | null;
+  return (
+    <>
+      <Title>Home page</Title>
+      <CreateTweetForm />
+      <Feed tweetsProps={feed} />
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({
@@ -53,8 +38,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 
   const feedPrisma = await prisma.tweet.findMany({
     include: {
-      content: true,
-      UserTwitter: true,
+      images: true,
+      userTwitter: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -69,14 +54,30 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   };
 };
 
-const Home: NextPage<Props> = ({ session, feed }) => {
-  return (
-    <>
-      <Title>Home page</Title>
-      <CreateTweetForm avatarSrc={session.profilePicture} />
-      <Feed tweetsProps={feed} />
-    </>
-  );
+export interface UserProps {
+  id: string;
+  name: string | null;
+  profilePicture: string | null;
+  profileCover: string | null;
+}
+
+export interface TweetProps {
+  id: number;
+  description: string | null;
+  retweeted: boolean | null;
+  liked: boolean | null;
+  userTwitter: UserProps;
+  createdAt: Date;
+  images: ImageProps[];
+
+  // todo
+  answering: TweetProps | null;
+  answers: TweetProps[];
+}
+
+export type ImageProps = {
+  id: string;
+  src: string;
 };
 
 export default Home;

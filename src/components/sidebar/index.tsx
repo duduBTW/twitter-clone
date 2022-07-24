@@ -9,10 +9,6 @@ import DropdownContent from "components/dropdownMenu";
 import { mq } from "constants/theme";
 import { UserProps } from "pages/home";
 
-interface Props {
-  user: UserProps;
-}
-
 const SIDEBAR_ROUTES = [
   {
     label: "Home",
@@ -46,7 +42,9 @@ const SIDEBAR_ROUTES = [
   },
 ] as const;
 
-const Sidebar: FC<Props> = ({ user }) => {
+const Sidebar: FC<{
+  user: UserProps;
+}> = ({ user }) => {
   const links = SIDEBAR_ROUTES.map((route) => (
     <AcaoSidebar key={route.href} {...route}>
       {route.label}

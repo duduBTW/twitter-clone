@@ -25,7 +25,7 @@ const TimeAgo: FC<Props> = ({ date }) => {
         minutes: "%d m",
         hour: "1 h",
         hours: "%d h",
-        day: "a day",
+        day: "1 day",
         days: "%d d",
         month: "1 m",
         months: "%d m",

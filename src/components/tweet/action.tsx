@@ -33,12 +33,6 @@ const TweetAction: FC<PropsWithChildren<Props>> = ({
   );
 };
 
-interface ContainerProps {
-  colorHover?: string;
-  color?: string;
-  active?: boolean;
-}
-
 const Icon = styled.i`
   box-sizing: border-box;
   line-height: 1.8rem;
@@ -50,7 +44,11 @@ const Icon = styled.i`
   margin-right: 0.4rem;
 `;
 
-const Container = styled.button<ContainerProps>`
+const Container = styled.button<{
+  colorHover?: string;
+  color?: string;
+  active?: boolean;
+}>`
   display: flex;
   align-items: center;
   color: ${({ color, active }) =>

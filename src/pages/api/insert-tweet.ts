@@ -5,28 +5,40 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // await prisma.tweet.create({
+  //   data: {
+  //     userTwitter: {
+  //       connect: {
+  //         id: "rr_ronron",
+  //       },
+  //     },
+  //     answering: {
+  //       connect: {
+  //         id: 4,
+  //       },
+  //     },
+  //     description: "シナモロールx初音ミクコラボのデザインを参考にしました。",
+  //   },
+  // });
+
   await prisma.tweet.create({
     data: {
-      content: {
-        create: [
-          {
-            type: "text",
-            src: "🟥RED",
-          },
-          {
-            type: "image",
-            src: "https://pbs.twimg.com/media/FVQ3GNpaAAE5Ap6?format=jpg&name=4096x4096",
-          },
-        ],
+      images: {
+        create: {
+          src: "https://pbs.twimg.com/media/FIoFWesagAUn0dy?format=jpg&name=4096x4096",
+        },
       },
-      UserTwitter: {
+      userTwitter: {
         connect: {
           id: "rr_ronron",
         },
       },
+      liked: true,
       retweeted: true,
+      description: "2022",
     },
   });
+
   // await prisma.tweet.create({
   //   data: {
   //     content: {

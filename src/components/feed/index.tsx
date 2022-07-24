@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
 import { TweetProps } from "pages/home";
-import Tweet from "components/tweet";
+import TweetCard from "components/tweet/card";
 import Link from "next/link";
 
 interface Props {
@@ -12,11 +12,11 @@ const Feed: FC<Props> = ({ tweetsProps }) => {
   const tweets = tweetsProps.map((tweetProps) => (
     <Link
       key={tweetProps.id}
-      href={`/${tweetProps.UserTwitter.id}/status/${tweetProps.id}`}
+      href={`/${tweetProps.userTwitter.id}/status/${tweetProps.id}`}
       passHref
     >
       <a>
-        <Tweet tweet={tweetProps} />
+        <TweetCard tweet={tweetProps} />
       </a>
     </Link>
   ));
@@ -27,6 +27,7 @@ const Feed: FC<Props> = ({ tweetsProps }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 80rem;
 `;
 
 export default Feed;

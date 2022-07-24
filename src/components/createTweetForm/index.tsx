@@ -4,16 +4,21 @@ import styled from "@emotion/styled";
 // components
 import Avatar from "components/avatar/avatar";
 import Button from "components/button";
+import { useSessionData } from "pages/_app";
 
-interface Props {
-  avatarSrc: string | null;
-}
+const CreateTweetForm: FC<{
+  className?: string;
+  placeholder?: string;
+}> = ({ className, placeholder = "What's happening?" }) => {
+  const user = useSessionData();
+  if (!user) return null;
 
-const CreateTweetForm: FC<Props> = ({ avatarSrc }) => {
   return (
-    <Container>
-      <Avatar src={avatarSrc ?? "https://placewaifu.com/image/400/400"} />
-      <Input placeholder="What's happening?" type="text" name="" id="" />
+    <Container className={className}>
+      <Avatar
+        src={user.profilePicture ?? "https://placewaifu.com/image/400/400"}
+      />
+      <Input placeholder={placeholder} type="text" name="" id="" />
       <Action>
         <Button>Tweet</Button>
       </Action>

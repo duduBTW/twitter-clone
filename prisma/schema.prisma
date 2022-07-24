@@ -11,23 +11,27 @@ datasource db {
 }
 
 model Tweet {
-  id            Int            @id @default(autoincrement())
-  UserTwitter   UserTwitter?   @relation(fields: [userTwitterId], references: [id])
-  retweeted     Boolean?       @default(false)
-  retweetes     Int?           @default(0)
-  liked         Boolean?       @default(false)
-  likes         Int?           @default(0)
-  createdAt     DateTime       @default(now())
-  content       TweetContent[]
+  id          Int      @id @default(autoincrement())
+  description String?
+  retweeted   Boolean? @default(false)
+  retweetes   Int?     @default(0)
+  liked       Boolean? @default(false)
+  likes       Int?     @default(0)
+  createdAt   DateTime @default(now())
+  images      Images[]
+
   userTwitterId String?
+  userTwitter   UserTwitter? @relation(fields: [userTwitterId], references: [id])
+
+  answeringId Int?
+  answering   Tweet?  @relation("TeacherStudents", fields: [answeringId], references: [id])
+  answers     Tweet[] @relation("TeacherStudents")
 }
 
-model TweetContent {
-  id      Int     @id @default(autoincrement())
-  type    String
-  src     String?
-  html    String?
-  Tweet   Tweet   @relation(fields: [tweetId], references: [id])
+model Images {
+  id      String @id @default(cuid())
+  src     String
+  Tweet   Tweet  @relation(fields: [tweetId], references: [id])
   tweetId Int
 }
 

@@ -12,6 +12,7 @@ import getLoggedUser from "utils/getLoggedUser";
 interface Props {
   user: UserProps;
   tweets: TweetProps[];
+  isSelf: boolean;
 }
 
 const User: NextPage<Props> = ({ user, tweets }) => {
@@ -42,6 +43,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
   }
 
   const session = await getLoggedUser(req, res);
+
   const user = await prisma.userTwitter.findFirst({
     where: {
       id,
@@ -53,8 +55,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
       userTwitterId: id,
     },
     include: {
-      UserTwitter: true,
-      content: true,
+      userTwitter: true,
+      images: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -72,6 +74,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
       user,
       tweets: JSON.parse(JSON.stringify(tweets)),
       session,
+      isSelf: session?.id === user.id,
     },
   };
 };

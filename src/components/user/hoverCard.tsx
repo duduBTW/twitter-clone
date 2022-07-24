@@ -24,7 +24,7 @@ const UserHoverCard: FC<PropsWithChildren<Props>> = ({
           <Container>
             <Header>
               <Avatar width="6rem" height="6rem" src={profilePicture ?? ""} />
-              <Button>Follow</Button>
+              <Button variant="oulined">Follow</Button>
             </Header>
             <Name>{name}</Name>
             <Id>@{id}</Id>
