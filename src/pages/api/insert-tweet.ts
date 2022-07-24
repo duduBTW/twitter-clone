@@ -9,7 +9,7 @@ export default async function handler(
   //   data: {
   //     userTwitter: {
   //       connect: {
-  //         id: "rr_ronron",
+  //         id: "xx_Chon_xx",
   //       },
   //     },
   //     answering: {
@@ -17,25 +17,32 @@ export default async function handler(
   //         id: 4,
   //       },
   //     },
-  //     description: "シナモロールx初音ミクコラボのデザインを参考にしました。",
+  //     description: `ずっと描きたかったので満足･v･*☁️☁️
+  //     シナミクさん最高かわいいね......👼`,
   //   },
   // });
 
   await prisma.tweet.create({
     data: {
       images: {
-        create: {
-          src: "https://pbs.twimg.com/media/FIoFWesagAUn0dy?format=jpg&name=4096x4096",
-        },
+        create: [
+          {
+            src: "https://pbs.twimg.com/media/E-hQWIPVEAUfRTF?format=jpg&name=medium",
+          },
+          {
+            src: "https://pbs.twimg.com/media/E-hQIaqUcAAdT20?format=jpg&name=medium",
+          },
+        ],
       },
       userTwitter: {
         connect: {
-          id: "rr_ronron",
+          id: "xx_Chon_xx",
         },
       },
       liked: true,
       retweeted: true,
-      description: "2022",
+      description: `シナモンミクさん。。。☁️𓈒𓏸
+      #初音ミク`,
     },
   });
 
