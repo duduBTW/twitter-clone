@@ -1,31 +1,44 @@
-import { FC } from "react";
-import { ImageProps } from "pages/home";
+import { FC, useEffect } from "react";
+import { ImageProps, TweetProps } from "pages/home";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import Link from "next/link";
+import { useTweetImageModal } from "pages/_app";
 
-interface Props {
-  images: ImageProps[];
+const TweetImages: FC<{
   fullHeight?: boolean;
-}
-
-const TweetImages: FC<Props> = ({ images, fullHeight }) => {
+  tweet: TweetProps;
+}> = ({ fullHeight, tweet }) => {
+  const { openModal } = useTweetImageModal();
+  const { images, userTwitter } = tweet;
   const size = images.length;
 
   return (
-    <Container size={size}>
-      {images.map(({ src, id }, index) => {
-        return (
-          <Image
-            size={size}
-            position={index + 1}
-            key={id}
-            fullHeight={fullHeight}
-            alt={`tweet image`}
-            src={src}
-          />
-        );
-      })}
-    </Container>
+    <>
+      <Container size={size}>
+        {images.map(({ src, id }, index) => {
+          return (
+            <Link
+              key={id}
+              href={`?userId=${userTwitter.id}&tweetId=${tweet.id}&photo=${
+                index + 1
+              }`}
+              as={`/${userTwitter.id}/status/${tweet.id}?photo=${index + 1}`}
+              shallow
+            >
+              <Image
+                size={size}
+                position={index + 1}
+                fullHeight={fullHeight}
+                alt={`tweet image`}
+                src={src}
+                onClick={() => openModal(tweet, index + 1)}
+              />
+            </Link>
+          );
+        })}
+      </Container>
+    </>
   );
 };
 

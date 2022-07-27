@@ -102,7 +102,7 @@ const Content: FC<{ tweet: TweetProps; insideTimeline?: boolean }> = ({
         }}
       >
         <Text>{tweet.description}</Text>
-        {tweet.images.length > 0 && <TweetImages images={tweet.images} />}
+        {tweet.images.length > 0 && <TweetImages tweet={tweet} />}
       </div>
       <Actions
         retweeted={retweeted}
@@ -158,7 +158,7 @@ const Time = styled.span`
 
 const Text = styled.div`
   font-family: "Nunito", sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   margin-top: -1.2rem;
 `;
 

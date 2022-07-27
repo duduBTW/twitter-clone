@@ -28,7 +28,7 @@ const TweetAction: FC<PropsWithChildren<Props>> = ({
       active={active}
     >
       <Icon className={icon} />
-      <div>{children}</div>
+      <Text>{children}</Text>
     </Container>
   );
 };
@@ -39,9 +39,13 @@ const Icon = styled.i`
   border-radius: 222rem;
   padding: 0.68rem 0.6rem 0.6rem;
   margin: -0.6rem;
-  font-size: 1.8rem;
-  line-height: 1.8rem;
-  margin-right: 0.4rem;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  margin-right: 0.2rem;
+`;
+
+const Text = styled.div`
+  font-size: 1.4rem;
 `;
 
 const Container = styled.button<{

@@ -7,12 +7,14 @@ import Avatar from "components/avatar/avatar";
 import TweetImages from "./images";
 import CreateTweetForm from "components/createTweetForm";
 
-const TweetStatus: FC<TweetProps> = ({ userTwitter, images, description }) => {
+const TweetStatus: FC<TweetProps> = (tweet) => {
+  const { userTwitter, images, description } = tweet;
+
   return (
     <Container>
       <User {...userTwitter} />
       <Text>{description}</Text>
-      {images.length > 0 && <TweetImages fullHeight images={images} />}
+      {images.length > 0 && <TweetImages fullHeight tweet={tweet} />}
 
       <AnswerTweetForm placeholder="Tweet your answer" />
     </Container>
